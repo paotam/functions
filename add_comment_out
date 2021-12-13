@@ -1,0 +1,8 @@
+---
+- name: remove comment out
+  lineinfile:
+    path: /work/add_comment_out
+    state: present
+    backrefs: yes
+    regexp: '^(def_conf.*)$'
+    line: '#\1'
