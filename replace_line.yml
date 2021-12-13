@@ -1,0 +1,6 @@
+---
+- name: rewrite number
+  replace:
+    dest: /work/num_rewite
+    regexp: '/usr/sbin/syncd 60'
+    replace: '/usr/sbin/syncd 10'
