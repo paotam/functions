@@ -1,0 +1,13 @@
+---
+- hosts: all
+  vars:
+    date: "{{ lookup('pipe','date +%Y%m%d%H%M') }}"
+  tasks:
+  - name: copy file
+    copy:
+      src: /tmp/test/hello.txt
+      dest: /tmp/test/hello.txt.{{ date }}
+      mode: 0644
+      backup: yes
+      force: yes
+      remote_src: yes
