@@ -1,0 +1,26 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+  - name: "check target files existence"
+    stat:
+      path: "{{ item }}"
+    with_items:
+      - /work/aaa
+      - /work/ccc
+      - /work/ddd
+    register: target_file_existence
+
+  - name: "debug msg"
+    debug:
+      msg: "{{ target_file_existence }}"
+
+  - name: "check exist"
+    fail:
+      msg: "{{ item }}"
+    with_items: "{{ target_file_existence.results | json_query('[? stat.exists==`false`].item') }}"
+
+  - name: "message"
+    debug:
+      msg: "test"
+
